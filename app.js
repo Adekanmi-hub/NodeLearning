@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 const dbUrl =
-  "mongodb+srv://AdekanmiHub:65145412Ed@nnodetuts.r33ucva.mongodb.net/?retryWrites=true&w=majority&appName=nnodetuts";
+  "mongodb+srv://AdekanmiHub:{Password}@nnodetuts.r33ucva.mongodb.net/?retryWrites=true&w=majority&appName=nnodetuts";
 mongoose
   .connect(dbUrl)
   .then((result) =>
