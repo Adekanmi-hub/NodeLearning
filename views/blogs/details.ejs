@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+    <div class="blogs content">
+      <h2><%= blog.title%></h2>
+      <div class="content">
+        <p><%= blog.body %></p>
+      </div>
+      <!-- The data attribute is a special attribute inside html where 
+     we canbasically add our own custom attribute in the case "doc" -->
+      <button class="delete" data-doc="<%= blog._id %>">delete</button>
+    </div>
+
+    <!-- This is for the frontend part -->
+    <script>
+      //This is to get the element we are targetting on our frontend.
+      const trashcan = document.querySelector("button.delete");
+
+      //We create an eventlistner
+      trashcan.addEventListener("click", (e) => {
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+        // then we add an asynchronous function to listen and delete
+        // what it is listening to.
+        //This is an AJAX Request because we are doing it from javascript.
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script>
+  </body>
+</html>
